@@ -1,0 +1,24 @@
+{
+  "name": "node.js-web-programming-package-online",
+  "version": "1.0.0",
+  "description": "패스트캠퍼스의 '한 번에 끝내는 Node.js 웹 프로그래밍 초격차 패키지 Online' 강의를 들으며 작성한 코드입니다.",
+  "main": "main.js",
+  "dependencies": {
+    "pretier": "^0.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-connor/Node.js-Web-Programming-Package-Online.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dev-connor/Node.js-Web-Programming-Package-Online/issues"
+  },
+  "homepage": "https://github.com/dev-connor/Node.js-Web-Programming-Package-Online#readme"
+}
