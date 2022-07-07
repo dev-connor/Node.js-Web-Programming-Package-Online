@@ -5,6 +5,8 @@
   "main": "main.js",
   "devDependencies": {
     "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "pretier": "^0.0.1"
   },
   "scripts": {
