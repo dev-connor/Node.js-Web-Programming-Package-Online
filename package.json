@@ -1,8 +1,4 @@
 {
-  "name": "node.js-web-programming-package-online",
-  "version": "1.0.0",
-  "description": "패스트캠퍼스의 '한 번에 끝내는 Node.js 웹 프로그래밍 초격차 패키지 Online' 강의를 들으며 작성한 코드입니다.",
-  "main": "main.js",
   "devDependencies": {
     "@types/node": "^18.0.3",
     "eslint": "^8.19.0",
@@ -14,7 +10,7 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "node src/main.js"
   },
   "repository": {
     "type": "git",
