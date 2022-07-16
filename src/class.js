@@ -9,7 +9,9 @@ class Person {
 }
 class Student extends Person {
     constructor(name) {
+        this.name = name
         super(name)
+        
     }
 
     study() {
