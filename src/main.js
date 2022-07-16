@@ -21,6 +21,8 @@ const me = new Student('Connor')
 console.log(me.greet())
 console.log(me.greet())
 
-const autherPerson = new Person('Foo')
+const anotherPerson = new Person('Foo')
 console.log(anotherPerson instanceof Student)
-console.log(anotherPerson instanceof Porson)
+console.log(anotherPerson instanceof Person)
+
+console.log([] instanceof Array)
