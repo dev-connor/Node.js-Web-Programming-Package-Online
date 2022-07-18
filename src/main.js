@@ -1,29 +1,6 @@
-const ary = [1, 2, 3, 4, 5]
-
-const [head, ...rest] = ary 
-
-console.log(head, ...rest)
-
-const personalData = {
-    email: 'abc@def.com',
-    password: '****'
+function foo(head, ...rest) {
+    console.log(head)
+    console.log(rest)
 }
 
-const publicData = {
-    nickname: 'foo'
-}
-
-const overrides = {
-    email: 'fff@fff.com',
-}
-
-const user = {
-    ...personalData,
-    ...publicData,
-    ...overrides,
-}
-
-console.log(user)
-
-
-
+foo(1, 2, 3, 4)
