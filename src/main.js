@@ -1,22 +1,5 @@
-class Person {
-    constructor(name) {
-        this.name = name
-    }
+const ary = [1, 2, 3, 4, 5]
 
-    greet() {
-        return `Hi, ${this.name}.`
-    }
-}
-class Student extends Person {
-    constructor(name) {
-        super(name)
-    }
+const [head, ...rest] = ary 
 
-    study() {
-        return `${this.name} is studying.`
-    }
-}
-
-const me = new Student(`Connor`)
-console.log(me.study())
-console.log(me.greet())
+console.log(head, ...rest)
