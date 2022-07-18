@@ -49,7 +49,7 @@ function solveA() {
 }
 
 function solveAModern() {
-    const allCities = people.filter(person => person.age < 30).map(person => person.city)
+    const allCities = people.filter(({age}) => age < 30).map(({city}) => city)
     const set = new Set(allCities)
     return Array.from(set)
 }
