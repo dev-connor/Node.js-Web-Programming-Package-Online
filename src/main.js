@@ -5,6 +5,11 @@ const people = [
         pet: ['cat', 'dog'],
     },
     {
+        age: 20,
+        city: '서울',
+        pet: ['cat', 'dog'],
+    },
+    {
         age: 40,
         city: '부산',
     },
@@ -43,4 +48,11 @@ function solveA() {
     return cities
 }
 
+function solveAModern() {
+    const allCities = people.filter(person => person.age < 30).map(person => person.city)
+    const set = new Set(allCities)
+    return Array.from(set)
+}
+
 console.log('solveA', solveA())
+console.log('solveAModern', solveAModern())
