@@ -137,7 +137,21 @@ function solveBModern() {
     ]
      */
        
-    }).map(({city, pets}) => pets.map(pet => [city, pet]))
+    }).flatMap(({city, pets}) => pets.map(pet => [city, pet]))
+    .reduce((/** @type {PetsOfCities} */ result, [city, pet]) => {
+        if (!city || !pet) {
+            return result
+        }
+
+        return {
+            ...result,
+            [city]: {
+                ...result[city],
+                [pet]: (result[city]?.[pet] || 0) + 1
+            },
+
+        }
+    }, {})
 }
 
 // console.log('solveB', solveB())
