@@ -110,4 +110,35 @@ function solveB() {
 
 }
 
-console.log('solveB', solveB())
+/* 
+["서울", "cat"],
+["서울", "dog"],
+["부산", "dog"],
+ */
+
+function solveBModern() {
+    return people.map(({pet: petOrPets, city}) => {
+        const pets = (typeof petOrPets === 'string' ? [petOrPets] : petOrPets) || []
+
+        return {
+            city,
+            pets,
+        }
+
+    /* 
+    [
+        [
+            {"서울", "cat"},
+            {"서울", "dog"},
+        ],
+        [
+            {"부산", "dog"},
+        ],
+    ]
+     */
+       
+    }).map(({city, pets}) => pets.map(pet => [city, pet]))
+}
+
+// console.log('solveB', solveB())
+console.log('solveBModern', solveBModern())
