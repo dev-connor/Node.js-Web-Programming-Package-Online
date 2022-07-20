@@ -22,3 +22,4 @@ fs.promises.readFile('.gitignore', 'utf-8')
 .then((value => console.log(value)))
 
 readFileInPromise('.gitignore').then((value => console.log(value)))
+
