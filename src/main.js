@@ -4,12 +4,15 @@
 /* eslint-disable no-console */
 
 new Promise((resolve, reject) => {
-    console.log('Inside promise')
-    reject(new Error('First reject'))
-    resolve('First resolve')
-}).then(value => {
-    console.log('Inside first then')
+    console.log('Before timeout')
+    setTimeout(() => {
+        resolve(Math.random())
+        console.log('After resolve`')
+    }, 1000)
+}).then((value) => {
     console.log('value', value)
-}).catch(error => {
-    console.log('error', error)
+}).then(() => {
+    console.log('then 2')
+}).then(() => {
+    console.log('then 2')
 })
