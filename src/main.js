@@ -1,33 +1,27 @@
-// @ts-check
+const objs = [
+    {
+        foo: {
+            bar: {
+                vaz: 1,
+            },
+        },
+    },
+    {},
+    {
+        foo: {},
+    },
+]
 
-require('core-js')
-
-/**
- * 
- * @param {number} duration 
- * @returns 
- */
-function sleep(duration) {
-    return new Promise((resolve) => {
-        console.log('sleep start')
-        setTimeout(() => {
-            console.log('sleep done', duration)
-            resolve(duration)
-        }, duration)
+console.log(
+    objs.map((obj) => {
+        const {foo} = obj
+        if (foo) {
+            const { bar } = foo
+            if (bar) {
+                return bar.baz
+            }
+        }
+        return undefined
     })
-}
+)
 
-function alwaysReject() {
-    return new Promise((resolve, reject) => {
-        reject()
-    })
-}
-
-Promise.allSettled([
-    sleep(1000),
-    sleep(1500),
-    sleep(2000),
-    alwaysReject()
-]).then((value) => {
-    console.log('Promise.all done!', value)
-})
