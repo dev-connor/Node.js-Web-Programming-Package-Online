@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/dev-connor/Node.js-Web-Programming-Package-Online/issues"
   },
-  "homepage": "https://github.com/dev-connor/Node.js-Web-Programming-Package-Online#readme"
+  "homepage": "https://github.com/dev-connor/Node.js-Web-Programming-Package-Online#readme",
+  "dependencies": {
+    "core-js": "^3.23.5"
+  }
 }
