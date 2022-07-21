@@ -1,29 +1,8 @@
 // @ts-check
 
-/* eslint-disable no-new */
-/* eslint-disable no-console */
+require('core-js')
 
-function sleep(duration) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(undefined)
-        }, duration)
-    })
-}
+const complicatedArray = [1, [2, 3]]
+const flattedArray = complicatedArray.flat()
 
-sleep()
-.then((value) => {
-    console.log(value)
-    return sleep()
-}).then(value => {
-    console.log(value)
-    return sleep()
-}).then(value => {
-    console.log(value)
-    return sleep()
-}).then(value => {
-    console.log(value)
-    return sleep()
-})
-
-sleep()
+console.log(flattedArray)
