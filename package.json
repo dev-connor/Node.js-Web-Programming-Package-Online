@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/dev-connor/Node.js-Web-Programming-Package-Online#readme",
   "dependencies": {
-    "core-js": "^3.23.5"
+    "core-js": "^3.23.5",
+    "esbuild": "^0.14.49"
   }
 }
