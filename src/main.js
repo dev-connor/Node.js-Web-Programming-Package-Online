@@ -2,7 +2,6 @@
 
 require('core-js')
 
-const complicatedArray = [1, [2, 3]]
-const flattedArray = complicatedArray.flat()
-
-console.log(flattedArray)
+const original = 'abcabc123'
+const changed = original.replaceAll('abc', '123')
+console.log(changed)
