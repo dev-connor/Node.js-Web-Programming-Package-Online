@@ -3,27 +3,27 @@
 /* eslint-disable no-new */
 /* eslint-disable no-console */
 
-function returnPromiseForTimeout() {
+function sleep(duration) {
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve(Math.random())
-        }, 1000)
+            resolve(undefined)
+        }, duration)
     })
 }
 
-returnPromiseForTimeout()
+sleep()
 .then((value) => {
     console.log(value)
-    return returnPromiseForTimeout()
+    return sleep()
 }).then(value => {
     console.log(value)
-    return returnPromiseForTimeout()
+    return sleep()
 }).then(value => {
     console.log(value)
-    return returnPromiseForTimeout()
+    return sleep()
 }).then(value => {
     console.log(value)
-    return returnPromiseForTimeout()
+    return sleep()
 })
 
-returnPromiseForTimeout()
+sleep()
