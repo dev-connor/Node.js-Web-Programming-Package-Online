@@ -25,3 +25,4 @@ console.log(
     })
 )
 
+console.log(objs.map((obj) => obj.foo?.bar.baz))
