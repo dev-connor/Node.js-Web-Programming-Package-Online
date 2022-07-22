@@ -14,7 +14,7 @@
   },
   "scripts": {
     "debug": "node src/main.js",
-    "build": "esbuild src/main.js --bundle --outfile=build/main.js --target=node10.4"
+    "build": "esbuild src/main.js --bundle --outfile=build/main.js --target=node12.22"
   },
   "repository": {
     "type": "git",
