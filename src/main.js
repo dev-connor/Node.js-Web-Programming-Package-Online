@@ -12,4 +12,4 @@ const objs = [
     },
 ]
 
-console.log(objs.map((obj) => obj.foo?.bar.baz))
+console.log(objs.map((obj) => obj.foo?.bar?.baz))
