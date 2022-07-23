@@ -13,6 +13,32 @@ const { Console } = require('console')
 const http = require('http')
 
 /**
+ * @typedef Post
+ * @property {string} id
+ * @property {string} title
+ * @property {string} content
+ */
+
+/** @type {Post} */
+const examplePost = {
+    id: 'abc',
+    title: 'abc',
+    content: 'abc',
+}
+
+const posts = [
+    {
+        id: "my_first_post",
+        title: "My first post",
+        content: "Hello!",
+    },
+    {
+        id: "my_second_post",
+        title: "My first post",
+    },
+]
+
+/**
  * POST
  * 
  * GET /posts
