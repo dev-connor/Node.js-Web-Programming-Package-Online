@@ -58,7 +58,7 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'application/json; charset=utf-8')
         res.end(JSON.stringify(result))
         
-    } else if (postIdRegexResult) { 
+    } else if (postIdRegexResult && req.method === 'GET') { 
         
         // GET /posts/:id
         const postId = postIdRegexResult[1]
