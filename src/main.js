@@ -9,6 +9,7 @@
  * RESTful API 를 사용합니다.
  */
 
+const { Console } = require('console')
 const http = require('http')
 
 /**
@@ -20,6 +21,7 @@ const http = require('http')
  */
 const server = http.createServer((req, res) => {
     console.log(req.url)
+    console.log("Reqeust accepted!")
     
     res.statusCode = 200
     res.end('Hello!')
