@@ -20,11 +20,22 @@ const http = require('http')
  * POST /posts
  */
 const server = http.createServer((req, res) => {
-    console.log(req.url)
-    console.log("Reqeust accepted!")
-    
-    res.statusCode = 200
-    res.end('Hello!')
+    if (req.url === '/posts' && req.method === 'GET') {
+        res.statusCode = 200
+        res.end('List of posts')
+        
+    } else if (req.url && /^\/posts\/[a-zA-Z0-9-_]+$/.test(req.url)) {
+        res.statusCode = 200
+        res.end('Some content of the post')
+        
+    } else if (req.url === '/posts' && req.method === 'POST') {
+        res.statusCode = 200
+        res.end('Creawting post')
+
+    } else {
+        res.statusCode = 404
+        res.end('Not found.')
+    }  
 })
 
 const PORT = 4000
