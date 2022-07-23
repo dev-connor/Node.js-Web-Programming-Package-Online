@@ -20,13 +20,23 @@ const http = require('http')
  * POST /posts
  */
 const server = http.createServer((req, res) => {
+    const PORTS_ID_REGEX = /^\/posts\/([a-zA-Z0-9-_]+)$/
+    const postIdRegexResult 
+    = req.url && PORTS_ID_REGEX.exec(req.url) || undefined
+    
     if (req.url === '/posts' && req.method === 'GET') {
         res.statusCode = 200
         res.end('List of posts')
         
-    } else if (req.url && /^\/posts\/[a-zA-Z0-9-_]+$/.test(req.url)) {
+    } else if (postIdRegexResult) { 
+        
+        // GET /posts/:id
+        const postId = postIdRegexResult[1]
+        console.log(`postId: ${postId}`)
+        
         res.statusCode = 200
-        res.end('Some content of the post')
+        res.end('Reading a post')
+    
         
     } else if (req.url === '/posts' && req.method === 'POST') {
         res.statusCode = 200
