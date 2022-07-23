@@ -19,13 +19,7 @@ const http = require('http')
  * @property {string} content
  */
 
-/** @type {Post} */
-const examplePost = {
-    id: 'abc',
-    title: 'abc',
-    content: 'abc',
-}
-
+/** @type {Post[]} */
 const posts = [
     {
         id: "my_first_post",
@@ -35,6 +29,7 @@ const posts = [
     {
         id: "my_second_post",
         title: "My first post",
+        content: "Second post!!",
     },
 ]
 
