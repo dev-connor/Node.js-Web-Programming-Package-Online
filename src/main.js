@@ -1,15 +1,3 @@
-const objs = [
-    {
-        foo: {
-            bar: {
-                vaz: 1,
-            },
-        },
-    },
-    {},
-    {
-        foo: {},
-    },
-]
+// @ts-check
 
-console.log(objs.map((obj) => obj.foo?.bar?.baz))
+// 프레임워크 없이 간단한 토이프로젝트 웹 서버 만들어보기
