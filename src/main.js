@@ -11,7 +11,16 @@
 
 const http = require('http')
 
+/**
+ * POST
+ * 
+ * GET /posts
+ * GET /posts/:id
+ * POST /posts
+ */
 const server = http.createServer((req, res) => {
+    console.log(req.url)
+    
     res.statusCode = 200
     res.end('Hello!')
 })
