@@ -28,7 +28,7 @@ const posts = [
     },
     {
         id: "my_second_post",
-        title: "My first post",
+        title: "나의 두번째 포스트",
         content: "Second post!!",
     },
 ]
@@ -46,17 +46,33 @@ const server = http.createServer((req, res) => {
     = req.url && PORTS_ID_REGEX.exec(req.url) || undefined
     
     if (req.url === '/posts' && req.method === 'GET') {
+        const result = {
+            posts: posts.map(post => ({
+                id: post.id,
+                title: post.title,
+            })),
+            totalCount: posts.length
+        }
+        
         res.statusCode = 200
-        res.end('List of posts')
+        res.setHeader('Content-Type', 'application/json')
+        res.end(JSON.stringify(result))
         
     } else if (postIdRegexResult) { 
         
         // GET /posts/:id
         const postId = postIdRegexResult[1]
-        console.log(`postId: ${postId}`)
+        const post = posts.find(_post => _post.id === postId)
         
-        res.statusCode = 200
-        res.end('Reading a post')
+        if (post) {
+            res.statusCode = 200
+            res.end(JSON.stringify(post))
+        } else {
+            res.statusCode = 404
+            res.end(`Post not found.`)
+            
+        }
+        
     
         
     } else if (req.url === '/posts' && req.method === 'POST') {
