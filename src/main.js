@@ -55,7 +55,7 @@ const server = http.createServer((req, res) => {
         }
         
         res.statusCode = 200
-        res.setHeader('Content-Type', 'application/json')
+        res.setHeader('Content-Type', 'application/json; charset=utf-8')
         res.end(JSON.stringify(result))
         
     } else if (postIdRegexResult) { 
@@ -66,19 +66,15 @@ const server = http.createServer((req, res) => {
         
         if (post) {
             res.statusCode = 200
+            res.setHeader('Content-Type', 'application/json; charset=utf-8')
             res.end(JSON.stringify(post))
         } else {
             res.statusCode = 404
             res.end(`Post not found.`)
-            
         }
-        
-    
-        
     } else if (req.url === '/posts' && req.method === 'POST') {
         res.statusCode = 200
         res.end('Creawting post')
-
     } else {
         res.statusCode = 404
         res.end('Not found.')
