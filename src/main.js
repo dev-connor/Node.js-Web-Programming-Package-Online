@@ -84,7 +84,7 @@ const server = http.createServer((req, res) => {
             /** @type {CreatePostBody} */
             const body = JSON.parse(data)
             posts.push({
-                id: body.title.toLocaleLowerCase().replace(' ', '_'),
+                id: body.title.toLocaleLowerCase().replace(/\s/g, '_'),
                 title: body.title,
                 content: body.content,
             })
