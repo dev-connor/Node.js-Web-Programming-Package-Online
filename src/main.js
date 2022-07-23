@@ -73,8 +73,25 @@ const server = http.createServer((req, res) => {
             res.end(`Post not found.`)
         }
     } else if (req.url === '/posts' && req.method === 'POST') {
+        req.setEncoding('utf-8')
+        req.on('data', (data) => {
+            /** 
+             * @typedef CreatePostBody
+             * @property {string} title
+             * @property {string} content
+             */
+            
+            /** @type {CreatePostBody} */
+            const body = JSON.parse(data)
+            posts.push({
+                id: body.title.toLocaleLowerCase().replace(' ', '_'),
+                title: body.title,
+                content: body.content,
+            })
+        })
+        
         res.statusCode = 200
-        res.end('Creawting post')
+        res.end('Creatting post')
     } else {
         res.statusCode = 404
         res.end('Not found.')
