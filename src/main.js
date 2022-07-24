@@ -30,7 +30,14 @@ const server = http.createServer((req, res) => {
 
         const result = await route.callback()
         res.statusCode = result.statusCode
-        res.end(result.body)
+
+        if (typeof result.body === 'string') {
+            res.end(result.body)
+        } else {
+            res.setHeader('Content-Type', 'applcation/json')
+            res.end(JSON.stringify(result.body))
+        }
+        
     }
     main()
 })

@@ -33,7 +33,7 @@ const posts = [
 /**
  * @typedef APIResponse
  * @property {number} statusCode
- * @property {*} body
+ * @property {string | Object} body
  */
 
 /**
@@ -50,7 +50,7 @@ const routes = [
         method: 'GET',
         callback: async () => ({
             statusCode: 200,
-            body: 'All posts',
+            body: {},
         }),
     },
         
