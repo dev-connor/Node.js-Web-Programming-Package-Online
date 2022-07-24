@@ -9,93 +9,30 @@
  * RESTful API 를 사용합니다.
  */
 
-const { Console } = require('console')
 const http = require('http')
+const {routes} = require('./api')
 
-/**
- * @typedef Post
- * @property {string} id
- * @property {string} title
- * @property {string} content
- */
-
-/** @type {Post[]} */
-const posts = [
-    {
-        id: "my_first_post",
-        title: "My first post",
-        content: "Hello!",
-    },
-    {
-        id: "my_second_post",
-        title: "나의 두번째 포스트",
-        content: "Second post!!",
-    },
-]
-
-/**
- * POST
- * 
- * GET /posts
- * GET /posts/:id
- * POST /posts
- */
 const server = http.createServer((req, res) => {
-    const PORTS_ID_REGEX = /^\/posts\/([a-zA-Z0-9-_]+)$/
-    const postIdRegexResult 
-    = req.url && PORTS_ID_REGEX.exec(req.url) || undefined
-    
-    if (req.url === '/posts' && req.method === 'GET') {
-        const result = {
-            posts: posts.map(post => ({
-                id: post.id,
-                title: post.title,
-            })),
-            totalCount: posts.length
-        }
-        
-        res.statusCode = 200
-        res.setHeader('Content-Type', 'application/json; charset=utf-8')
-        res.end(JSON.stringify(result))
-        
-    } else if (postIdRegexResult && req.method === 'GET') { 
-        
-        // GET /posts/:id
-        const postId = postIdRegexResult[1]
-        const post = posts.find(_post => _post.id === postId)
-        
-        if (post) {
-            res.statusCode = 200
-            res.setHeader('Content-Type', 'application/json; charset=utf-8')
-            res.end(JSON.stringify(post))
-        } else {
+    async function main() {
+        const route = routes.find(
+            (_route) => 
+            req.url && 
+            req.method && 
+            _route.url.test(req.url) &&
+            _route.method === req.method
+        )
+
+        if (!route) {
             res.statusCode = 404
-            res.end(`Post not found.`)
+            res.end('Not found.')
+            return 
         }
-    } else if (req.url === '/posts' && req.method === 'POST') {
-        req.setEncoding('utf-8')
-        req.on('data', (data) => {
-            /** 
-             * @typedef CreatePostBody
-             * @property {string} title
-             * @property {string} content
-             */
-            
-            /** @type {CreatePostBody} */
-            const body = JSON.parse(data)
-            posts.push({
-                id: body.title.toLocaleLowerCase().replace(/\s/g, '_'),
-                title: body.title,
-                content: body.content,
-            })
-        })
-        
-        res.statusCode = 200
-        res.end('Creatting post')
-    } else {
-        res.statusCode = 404
-        res.end('Not found.')
-    }  
+
+        const result = await route.callback()
+        res.statusCode = result.statusCode
+        res.end(result.body)
+    }
+    main()
 })
 
 const PORT = 4000
