@@ -50,7 +50,7 @@ const routes = [
         method: 'GET',
         callback: async () => ({
             statusCode: 200,
-            body: {},
+            body: posts,
         }),
     },
         
