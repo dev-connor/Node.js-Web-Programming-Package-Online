@@ -40,7 +40,7 @@ const posts = [
  * @typedef Route
  * @property {RegExp} url
  * @property {'GET' | 'POST'} method
- * @property {(matches: string[], body: Object | undefined) => Promise<APIResponse>} callback
+ * @property {(matches: string[], body: Object.<string, *> | undefined) => Promise<APIResponse>} callback
  */
 
 /** @type {Route[]} */
@@ -48,7 +48,7 @@ const routes = [
     {
         url: /^\/posts$/,
         method: 'GET',
-        callback: async () => ({
+        callback: async (_, body) => ({
             statusCode: 200,
             body: posts,
         }),
@@ -87,10 +87,11 @@ const routes = [
         url: /^\/posts$/,
         method: 'POST', 
         callback: async (_, body) => {
-            body.title body.content
+            console.log(body)
 
             return {
                 statusCode: 200,
+                body: 'Test',
                 
             }
         },
