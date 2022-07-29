@@ -87,11 +87,29 @@ const routes = [
         url: /^\/posts$/,
         method: 'POST', 
         callback: async (_, body) => {
-            console.log(body)
+            if (!body) {
+                return {
+                    statusCode: 400,
+                    body: 'Ill-formed request.'
+                }
+            }
+            
+            /** @type {string} */
+            /* eslint-disable-next-line prefer-destructuring */
+            const title = body.title
+            const newPost = {
+                id: title.replace(/\s/g, '_'),
+                title,
+                content: body.content,
+                
+            }
+
+            posts.push(newPost)
+
 
             return {
                 statusCode: 200,
-                body: 'Test',
+                body: newPost,
                 
             }
         },
