@@ -43,6 +43,15 @@ const posts = [
  * @property {(matches: string[], body: Object.<string, *> | undefined) => Promise<APIResponse>} callback
  */
 
+const fs = require('fs')
+
+/** @returns {Promise<Post[]>} */
+async function getPosts() {
+    const json = await fs.promises.readFile('database.json', 'utf-8')
+    return JSON.parse(json).posts
+
+}
+
 /** @type {Route[]} */
 const routes = [
     {
@@ -50,7 +59,7 @@ const routes = [
         method: 'GET',
         callback: async (_, body) => ({
             statusCode: 200,
-            body: posts,
+            body: await getPosts(),
         }),
     },
         
