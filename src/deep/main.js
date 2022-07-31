@@ -8,5 +8,5 @@
 const { paths } = module
 console.log({paths})
 
-const aniamls = require('animals')
-console.log(aniamls)
+const animals = require('animals')
+console.log(animals)
