@@ -7,20 +7,6 @@
  * @property {string} content
  */
 
-/** @type {Post[]} */
-const posts = [
-    {
-        id: "my_first_post",
-        title: "My first post",
-        content: "Hello!",
-    },
-    {
-        id: "my_second_post",
-        title: "나의 두번째 포스트",
-        content: "Second post!!",
-    },
-]
-
 /**
  * POST
  * 
@@ -62,7 +48,9 @@ const routes = [
             body: await getPosts(),
         }),
     },
-        
+
+
+    
     {
         url: /^\/posts\/([a-zA-Z0-9-_]+)$/,
         method: 'GET', 
@@ -75,7 +63,8 @@ const routes = [
                     body: 'Not found',
                 }
             }
-            
+
+            const posts = await getPosts()
             const post = posts.find(_post => _post.id === postId)
             
             if (!post) {
