@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "decamelize": "^5.0.0"
-  },
   "devDependencies": {
     "eslint": "^7.25.0"
   }
