@@ -1,8 +1,5 @@
 {
-  "scripts": {
-    "lint": "eslint src/**/*"
-  },
-  "devDependencies": {
-    "eslint": "^7.25.0"
+  "dependencies": {
+    "decamelize": "5.0.0"
   }
 }
