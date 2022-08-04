@@ -1,15 +1,11 @@
 // @ts-check
 
+const path = require('path')
 const fs = require('fs')
 
-let count = 0
+const filePath = path.resolve(__dirname, './test.txt')
+console.log('filePath', filePath)
 
-const handle = setInterval(() => {
-    console.log('Interval')
-    count += 1
+const fileContent = fs.readFileSync(filePath, 'utf-8')
+console.log(fileContent)
 
-    if (count === 4) {
-        console.log('done!')
-        clearInterval(handle)
-    }
-}, 1000);
