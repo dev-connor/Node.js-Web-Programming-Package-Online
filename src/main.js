@@ -2,6 +2,14 @@
 
 const fs = require('fs')
 
-const stream = fs.createReadStream('src/test')
+let count = 0
 
-stream.pipe(process.stdout)
+const handle = setInterval(() => {
+    console.log('Interval')
+    count += 1
+
+    if (count === 4) {
+        console.log('done!')
+        clearInterval(handle)
+    }
+}, 1000);
