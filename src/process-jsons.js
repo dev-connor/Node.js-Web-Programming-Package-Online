@@ -6,30 +6,39 @@ const fs = require('fs')
 
 const rs = fs.createReadStream('local/jsons', {
     encoding: 'utf-8',
-    highWaterMark: 6,
+    highWaterMark: 20,
 })
 
 let totalSum = 0
+let accumulatedJsonStr = ''
 
-rs.on('data', chunk => {
+rs.on('data', (chunk) => {
     log('Event: data', chunk)
 
+    
     if (typeof chunk !== 'string') {
         return
     }
 
-    totalSum += chunk
+    accumulatedJsonStr += chunk
+
+    const lastNewlineIdx = accumulatedJsonStr.lastIndexOf('\n')
+
+    const jsonLinesStr = accumulatedJsonStr.substring(0, lastNewlineIdx)
+    accumulatedJsonStr = accumulatedJsonStr.substring(lastNewlineIdx)
+    
+    totalSum += jsonLinesStr
         .split('\n')
-        .map(jsonLine => {
+        .map((jsonLine) => {
             try {
                 return JSON.parse(jsonLine)
             } catch (error) {
                 return undefined
             }
         })
-        .filter(json => json)
+        .filter((json) => json)
         .map((json) => json.data)
-        .reduce((sum, curr) => sum + curr, 0) 
+        .reduce((sum, curr) => sum + curr, 0)  
 })
 
 rs.on('end', () => {
