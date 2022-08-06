@@ -10,6 +10,7 @@
  */
 
 const https = require('https')
+const { resolve } = require('path')
 
 const GOTAPI_PREFIX = 'https://game-of-thrones-quotes.herokuapp.com/v1'
 
@@ -66,17 +67,74 @@ async function getMergedQuotesOfCharacter(slug) {
     return character[0].quotes.join(' ').replace(/[^a-zA-Z0-9., ]/g, '')
 }
 
+/**
+ * 
+ * @param {string} quote 
+ */
+async function getSentimAPIResult(quote) {
+    return new Promise((resolve, reject) => {
+        const body = JSON.stringify({
+            text: quote,
+        })
+        
+        const postReq = https.request(
+            {
+              hostname: 'sentim-api.herokuapp.com',
+              method: 'POST',
+              path: '/api/v1/',
+              headers: {
+                Accept: 'application/json; encoding=utf-8',
+                'Content-Type': 'application/json; encoding=utf-8',
+                'Content-Length': body.length,
+              },
+            }, (res) => {
+                let jsonStr = ''
+                res.setEncoding('utf-8')
+                res.on('data', (data) => {
+                    jsonStr += data
+                })
+                res.on('end', () => {
+                    try {
+                        resolve(JSON.parse(jsonStr))
+                        
+                    } catch {
+                        reject(new Error('The server response was not a valid JSON document.'))
+                        
+                    }
+
+                })
+            })
+        postReq.write(body)
+    })
+}
+
 async function main() {
     const houses = await getHouses()
-
-    const results = await Promise.all(
+    const characters = await Promise.all(
         houses
         .map(house => 
-            house.members.map(member => getMergedQuotesOfCharacter(member.slug))
+            house.members.map(member => 
+                getMergedQuotesOfCharacter(member.slug).then(quote => ({
+                    house: house.slug,
+                    character: member.slug,
+                    quote,
+                }))
+            )
         )
         .flat()
     )
-    console.log(results)
+
+    const charactersWithPolarity = await Promise.all(
+        characters.map(async (character) => {
+            const result = await getSentimAPIResult(character.quote)
+            return ({
+                ...character,
+                polarity: result.result.polarity,
+            })
+        })
+    )
+
+    console.log(charactersWithPolarity)
 }
 
 main()
