@@ -1,6 +1,8 @@
 /**
  * @typedef Character
  * @property {string} slug
+ * @property {number} polarity
+ * @property {House} slug
  */
 
 /**
@@ -9,6 +11,7 @@
  * @property {Character[]} members
  */
 
+const { captureRejectionSymbol } = require('events')
 const https = require('https')
 const { resolve } = require('path')
 
@@ -108,6 +111,16 @@ async function getSentimAPIResult(quote) {
     })
 }
 
+/**
+ * 
+ * @param {number[]} numbers 
+ * @returns {number}
+ */
+function sum(numbers) {
+    return numbers.reduce((memo, curr) => memo + curr, 0)
+    
+}
+
 async function main() {
     const houses = await getHouses()
     const characters = await Promise.all(
@@ -127,14 +140,36 @@ async function main() {
     const charactersWithPolarity = await Promise.all(
         characters.map(async (character) => {
             const result = await getSentimAPIResult(character.quote)
-            return ({
+            return {
                 ...character,
                 polarity: result.result.polarity,
-            })
+            }
         })
     )
 
-    console.log(charactersWithPolarity)
+    /** @type {Object.<string, Character[]>} */
+    const charactersBuHouseSlugs = {}
+    
+    charactersWithPolarity.forEach(character => {
+        charactersBuHouseSlugs[character.house] = 
+        charactersBuHouseSlugs[character.house] || []
+        charactersBuHouseSlugs[character.house].push(character)
+    })
+
+    const houseSlugs = Object.keys(charactersBuHouseSlugs)
+    const result = houseSlugs.map(houseSlug => {
+        const charactersOfHouse = charactersBuHouseSlugs[houseSlug]
+
+        if (!charactersOfHouse) {
+            return undefined
+        }
+        const sumPolarity = sum(
+            charactersOfHouse.map(character => character.polarity)
+        )
+        const averagePolarity = sumPolarity / charactersOfHouse.length
+        return [houseSlug, averagePolarity]
+    })
+    console.log(result)
 }
 
 main()
