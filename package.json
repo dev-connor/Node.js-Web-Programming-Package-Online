@@ -1,14 +1,15 @@
 {
-  "engines": {
-    "node": "14.16.1"
-  },
-  "scripts": {
-    "lint": "eslint src/**/*"
+  "devDependencies": {
+    "@types/node": "^15.0.0",
+    "eslint": "7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.4"
   },
   "dependencies": {
-    "decamelize": "5.0.0"
-  },
-  "devDependencies": {
-    "eslint": "7.25.0"
+    "express": "^4.17.1"
   }
 }
