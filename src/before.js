@@ -76,6 +76,8 @@ https.get(`https://game-of-thrones-quotes.herokuapp.com/v1/houses`, (res) => {
                       numMembersDone += 1
 
                       if (numMembersDone === numTotalMembers) {
+                        console.log('Finished', resultsByHouseSlugs)
+                        
                         const resultSlugs = Object.keys(resultsByHouseSlugs)
                         const finalResult = resultSlugs
                           .map((slug) => {
