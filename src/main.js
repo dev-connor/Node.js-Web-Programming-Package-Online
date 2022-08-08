@@ -1,24 +1,24 @@
 // @ts-check
 
 const express = require('express')
+const fs = require('fs')
+
+const userRouter = express.Router()
 
 const app = express()
 
 const PORT = 5000
 
-app.use('/', (req, res, next) => {
-    console.log('Middleware 1')
-    const requestedAt = new Date()
-    // @ts-ignore
-    req.requestedAt = requestedAt
-    next()
+app.get('/users', (req, res) => {
+    res.send('User list')
 })
 
-app.use((req, res) => {
-    console.log('Middleware 2')
-    // @ts-ignore
-    res.send(`Hello, express!: Requested at ${req.requestedAt}`)
-    res.send('Hello, express!')
+app.get('/users/:id', (req, res) => {
+    res.send('User info with ID')
+})
+
+app.post('/users', (req, res) => {
+    // Register user
 })
 
 app.listen(PORT, () => {
