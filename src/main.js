@@ -13,7 +13,19 @@ userRouter.get('/', (req, res) => {
 res.send('User list')
 })
 
+const USERS = {
+    15: {
+        nickname: 'foo', 
+    }
+}
+
+userRouter.param('id', (req, res, next, value) => {
+    console.log(`id parameter`, value)
+    next()
+})
+
 userRouter.get('/:id', (req, res) => {
+    console.log('userRouter get ID')
     res.send('User info with ID')
 })
 
