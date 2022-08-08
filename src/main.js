@@ -9,17 +9,20 @@ const app = express()
 
 const PORT = 5000
 
-app.get('/users', (req, res) => {
-    res.send('User list')
+userRouter.get('/', (req, res) => {
+res.send('User list')
 })
 
-app.get('/users/:id', (req, res) => {
+userRouter.get('/:id', (req, res) => {
     res.send('User info with ID')
 })
 
-app.post('/users', (req, res) => {
+userRouter.post('/', (req, res) => {
     // Register user
+    res.send('User registered.')
 })
+
+app.use('/users', userRouter)
 
 app.listen(PORT, () => {
     console.log(`The Express server is listening at port: ${PORT}`)
