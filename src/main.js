@@ -64,6 +64,7 @@ userRouter.post('/:id/nickname', (req, res) => {
 })
 
 app.use('/users', userRouter)
+app.use('/public', express.static('src/public'))
 
 app.listen(PORT, () => {
     console.log(`The Express server is listening at port: ${PORT}`)
