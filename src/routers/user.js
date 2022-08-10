@@ -56,7 +56,6 @@ router.param('id', async (req, res, next, value) => {
                 userId: req.params.id,
                 // profileImageURL: '/uploads/ed0dcb88284de748529cd638e9193bc4',
                 profileImageURL: `/uploads/${req.user.profileImageKey}`,
-                
             })
         }
     })
