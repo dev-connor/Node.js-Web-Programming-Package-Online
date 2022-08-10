@@ -12,3 +12,7 @@ body {
 .big {
     font-size: 24px2;
 }
+
+.profileImage {
+    width: 300px;
+}

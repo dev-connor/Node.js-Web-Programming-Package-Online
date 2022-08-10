@@ -10,11 +10,11 @@ const router = express.Router()
 const USERS = {
     15: {
         nickname: 'foo', 
-        profileImage: undefined,
+        profileImageKey: undefined,
     },
     16: {
         nickname: 'bar', 
-        profileImage: undefined,
+        profileImageKey: undefined,
     },
 }
 
@@ -54,7 +54,9 @@ router.param('id', async (req, res, next, value) => {
                 // @ts-ignore
                 nickname: req.user.nickname,
                 userId: req.params.id,
-                profileImageURL: '/uploads/ed0dcb88284de748529cd638e9193bc4',
+                // profileImageURL: '/uploads/ed0dcb88284de748529cd638e9193bc4',
+                profileImageURL: `/uploads/${req.user.profileImageKey}`,
+                
             })
         }
     })
@@ -79,7 +81,7 @@ router.param('id', async (req, res, next, value) => {
 
         const { user } = req
         const {filename} = req.file
-        user.profileImage = filename
+        user.profileImageKey = filename
         
         res.send(`User profile image uploaded: ${filename}`)
     })
