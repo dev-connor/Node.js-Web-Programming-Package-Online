@@ -50,6 +50,7 @@ router.param('id', async (req, res, next, value) => {
             res.render('user-profile', {
                 // @ts-ignore
                 nickname: req.user.nickname,
+                userId: req.params.id,
             })
         }
     })
