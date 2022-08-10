@@ -54,7 +54,7 @@ router.param('id', async (req, res, next, value) => {
                 // @ts-ignore
                 nickname: req.user.nickname,
                 userId: req.params.id,
-                profileImageURL: 'uploads/ed0dcb88284de748529cd638e9193bc4',
+                profileImageURL: '/uploads/ed0dcb88284de748529cd638e9193bc4',
             })
         }
     })
