@@ -43,22 +43,11 @@ async function main() {
         },
     ])
 
-    await users.deleteOne({
-        name: 'Baz',
+
+    const cursor = users.find({
+            'contacts.type': 'phone'
     })
 
-    const cursor = users.find(
-    {
-        birthYear: {
-            $gte: 1990,
-        },
-    },
-    {
-        sort: {
-            birthYear: -1,
-        },
-    },
-    )
     await cursor.forEach(console.log)
 
     await client.close()
