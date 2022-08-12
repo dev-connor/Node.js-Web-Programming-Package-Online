@@ -17,15 +17,34 @@ async function main() {
     await users.insertMany([
         {
             name: 'Foo',
+            birthYear: 2000,
         },
         {
             name: 'Bar',
+            birthYear: 1995,
         },
         {
             name: 'Baz',
+            birthYear: 1990,
+        },
+        {
+            name: 'Poo',
+            birthYear: 1993,
         },
     ])
-    const cursor = users.find({})
+
+    const cursor = users.find(
+    {
+        birthYear: {
+            $gte: 1990,
+        },
+    },
+    {
+        sort: {
+            birthYear: -1,
+        },
+    },
+    )
     await cursor.forEach(console.log)
 
     await client.close()
