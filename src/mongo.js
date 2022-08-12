@@ -79,6 +79,22 @@ async function main() {
                 foreignField: 'name', 
                 as: 'city_info',
             },
+        },
+        {
+            $match: {
+                $and: [
+                    {
+                        'city_info.population': {
+                            $gte: 500,
+                        },
+                    },
+                    {
+                        birthYear: {
+                            $gte: 1995,
+                        },
+                    },
+                ]
+            }
         }
     ])
     
