@@ -12,8 +12,24 @@ async function main() {
     const c = await client.connect()
 
     const users = client.db('fc21').collection('users')
+    const cities = client.db('fc21').collection('cities')
     
+    // Reset
     await users.deleteMany({})
+    await cities.deleteMany({})
+
+    // Init
+    await cities.insertMany([
+        {
+            name: '서울',
+            population: 1000,
+        },
+        {
+            name: '부산',
+            population: 350,
+        },
+    ])
+
     await users.insertMany([
         {
             name: 'Foo',
@@ -28,10 +44,7 @@ async function main() {
                     number: '+82023334444'
                 },
             ],
-            city: {
-                name: '서울',
-                population: 1000,
-            },
+            city: '서울'
         },
         {
             name: 'Bar',
@@ -42,31 +55,35 @@ async function main() {
                     number: '+821000001111'
                 },
             ],
-            city: {
-                name: '부산',
-                population: 350,
-            },
+            city: '부산'
         },
         {
             name: 'Baz',
             birthYear: 1990,
-            city: {
-                name: '부산',
-                population: 350,
-            },
+            city: '부산'
         },
         {
             name: 'Poo',
             birthYear: 1993,
-            city: {
-                name: '부산',
-                population: 350,
-            },
+            city: '서울'
         },
     ])
 
 
-    const cursor = users.find({
+
+    const cursor = users.aggregate([
+        {
+            $lookup: {
+                from: 'cities',
+                localField: 'city', 
+                foreignField: 'name', 
+                as: 'city_info',
+            },
+        }
+    ])
+    
+    
+    users.find({
             'contacts.type': 'phone'
     })
 
