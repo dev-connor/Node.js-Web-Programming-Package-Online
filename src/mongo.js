@@ -18,6 +18,16 @@ async function main() {
         {
             name: 'Foo',
             birthYear: 2000,
+            contacts: [
+                {
+                    type: 'phone', 
+                    number: '+821000001111'
+                },
+                {
+                    type: 'home', 
+                    number: '+82023334444'
+                },
+            ]
         },
         {
             name: 'Bar',
