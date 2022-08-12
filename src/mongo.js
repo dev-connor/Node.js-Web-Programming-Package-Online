@@ -27,19 +27,41 @@ async function main() {
                     type: 'home', 
                     number: '+82023334444'
                 },
-            ]
+            ],
+            city: {
+                name: '서울',
+                population: 1000,
+            },
         },
         {
             name: 'Bar',
             birthYear: 1995,
+            contacts: [
+                {
+                    type: 'phone', 
+                    number: '+821000001111'
+                },
+            ],
+            city: {
+                name: '부산',
+                population: 350,
+            },
         },
         {
             name: 'Baz',
             birthYear: 1990,
+            city: {
+                name: '부산',
+                population: 350,
+            },
         },
         {
             name: 'Poo',
             birthYear: 1993,
+            city: {
+                name: '부산',
+                population: 350,
+            },
         },
     ])
 
