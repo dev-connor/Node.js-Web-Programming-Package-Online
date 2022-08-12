@@ -33,6 +33,10 @@ async function main() {
         },
     ])
 
+    await users.deleteOne({
+        name: 'Baz',
+    })
+
     const cursor = users.find(
     {
         birthYear: {
