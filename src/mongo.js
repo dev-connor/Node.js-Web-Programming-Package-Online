@@ -82,7 +82,7 @@ async function main() {
         },
         {
             $match: {
-                $and: [
+                $or: [
                     {
                         'city_info.population': {
                             $gte: 500,
@@ -95,6 +95,9 @@ async function main() {
                     },
                 ]
             }
+        },
+        {
+            $count: 'num_users',
         }
     ])
     
