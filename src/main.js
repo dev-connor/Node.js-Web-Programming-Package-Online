@@ -9,7 +9,7 @@ const app = new Koa()
 // @ts-ignore
 new Pug({
     viewPath: path.resolve(__dirname, './views'),
-    app: app // Binding `ctx.render()`, equals to pug.use(app)
+    app, // Binding `ctx.render()`, equals to pug.use(app)
   })
 
 app.use(async (ctx) => {
