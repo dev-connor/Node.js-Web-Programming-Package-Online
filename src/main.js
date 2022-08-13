@@ -31,12 +31,20 @@ app.ws.use(
             
             const { message, nickname} = JSON.parse(data)
 
-            ctx.websocket.send(
-                JSON.stringify({
-                    message,
-                    nickname,
-                })
-            )
+            const { server } = app.ws
+
+            if (!server) {
+                return 
+            }
+
+            server.clients.forEach(client => {
+                client.send(
+                    JSON.stringify({
+                        message,
+                        nickname,
+                    })
+                )
+            })
         })
     })
 )
