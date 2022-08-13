@@ -1,10 +1,19 @@
-// @ts-check
+// @ts-check 
 
-const Koa = require('koa');
-const app = new Koa();
+const Koa = require('koa')
+const Pug = require('koa-pug')
+const path = require('path')
 
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
+const app = new Koa()
 
-app.listen(3000);
+// @ts-ignore
+new Pug({
+    viewPath: path.resolve(__dirname, './views'),
+    app: app // Binding `ctx.render()`, equals to pug.use(app)
+  })
+
+app.use(async (ctx) => {
+  await ctx.render('main')
+})
+
+app.listen(5000)
