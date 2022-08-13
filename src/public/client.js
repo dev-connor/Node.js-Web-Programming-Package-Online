@@ -3,12 +3,20 @@
 // IIFE
 ;(() => {
     const socket = new WebSocket(`ws://${window.location.host}/ws`)
+    const formEl = document.getElementById('form')
+    /** @type {HTMLInputElement | null} */
+    // @ts-ignore
+    const inputEl = document.getElementById('input')
 
-    socket.addEventListener('open', () => {
-        socket.send('Hello, server!')
+    if (!formEl || !inputEl) {
+        throw new Error('Init failed!')
+    }
+
+    formEl.addEventListener('submit', event => {
+        event.preventDefault()
+        socket.send(inputEl.value)
+        inputEl.value = ''
     })
 
-    socket.addEventListener('message', event => {
-        alert(event.data)
-    })
+    socket.addEventListener('message', event => {})
 })()
