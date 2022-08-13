@@ -30,7 +30,6 @@ app.ws.use(
             }
             
             const { message, nickname} = JSON.parse(data)
-
             const { server } = app.ws
 
             if (!server) {
