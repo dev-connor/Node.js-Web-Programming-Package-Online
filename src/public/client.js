@@ -56,7 +56,6 @@
 
     socket.addEventListener('message', event => {
         chats.push(JSON.parse(event.data))
-
         chatsEl.innerHTML = ''
 
         chats.forEach(({message, nickname}) => {
