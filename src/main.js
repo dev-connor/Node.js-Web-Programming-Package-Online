@@ -4,8 +4,7 @@ const fs = require('fs')
 const http = require('http')
 const { createApi } = require('unsplash-js')
 const { default: fetch} = require('node-fetch')
-const { default: convertLayerAtRulesToControlComments } = require('tailwindcss/lib/lib/convertLayerAtRulesToControlComments')
-
+const sharp = require('sharp')
 
 const unsplash = createApi({
   accessKey: process.env.UNSPLASH_API_ACCESS_KEY,
@@ -38,9 +37,27 @@ async function searchImage(query) {
     }
 }
 
+/**
+ * 
+ * @param {string} url 
+ */
+function convertURLToQueryKeyword(url) {
+    return url.slice(1)
+
+
+}
+
 const server = http.createServer((req, res) => {
     async function main() {
-        const result = await searchImage('mountin')
+        if (!req.url) {
+            res.statusCode = 400
+            res.end('Needs URL.')
+            return
+            
+        }
+        
+        const query = convertURLToQueryKeyword(req.url)
+        const result = await searchImage(query)
         const resp = await fetch(result.url)
         resp.body.pipe(res)
 
