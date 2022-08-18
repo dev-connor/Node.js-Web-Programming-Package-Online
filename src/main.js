@@ -7,7 +7,7 @@ const { createApi } = require('unsplash-js')
 const { default: fetch} = require('node-fetch')
 const { pipeline } = require('stream')
 const { promisify } = require('util')
-// const sharp = require('sharp')
+const sharp = require('sharp')
 
 const unsplash = createApi({
   accessKey: process.env.UNSPLASH_API_ACCESS_KEY,
@@ -71,8 +71,16 @@ async function getCachedImageOrSearchedImage(query) {
  * 이미지를 Unsplash 에서 검색하거나, 이미 있다면 캐시된 이미지를 리턴합니다.
  * @param {string} url 
  */
-function convertURLToQueryKeyword(url) {
-    return url.slice(1)
+function convertURLToImageInfo(url) {
+    const urlObj = new URL(url, 'http://localhost:5000')
+    const widthStr = urlObj.searchParams.get('width')
+    const width = widthStr ? parseInt(widthStr, 10) : 400
+    
+    return {
+        query: urlObj.pathname.slice(1),
+        width,
+
+    } 
 }
 
 const server = http.createServer((req, res) => {
@@ -84,12 +92,11 @@ const server = http.createServer((req, res) => {
             
         }
         
-        const query = convertURLToQueryKeyword(req.url)
+        const {query, width} = convertURLToImageInfo(req.url)
         try {
             const {message, stream} = await getCachedImageOrSearchedImage(query)
-            stream.pipe(res)
-            
             console.log(message)
+            await promisify(pipeline) (stream, sharp().resize(width).png(), res)
         } catch {
             res.statusCode = 400
             res.end()
