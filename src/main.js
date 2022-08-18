@@ -5,7 +5,9 @@ const path = require('path')
 const http = require('http')
 const { createApi } = require('unsplash-js')
 const { default: fetch} = require('node-fetch')
-const sharp = require('sharp')
+const { pipeline } = require('stream')
+const { promisify } = require('util')
+// const sharp = require('sharp')
 
 const unsplash = createApi({
   accessKey: process.env.UNSPLASH_API_ACCESS_KEY,
@@ -53,8 +55,11 @@ async function getCachedImageOrSearchedImage(query) {
     
     const result = await searchImage(query)
     const resp = await fetch(result.url)
-    
-    resp.body.pipe(fs.createWriteStream(imageFilePath))
+
+    await promisify(pipeline) (
+        resp.body,
+        fs.createWriteStream(imageFilePath),
+    )
     
     return {
         message: `Returning new image: ${query}`,
