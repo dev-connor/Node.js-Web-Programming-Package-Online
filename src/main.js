@@ -68,8 +68,6 @@ async function getCachedImageOrSearchedImage(query) {
  */
 function convertURLToQueryKeyword(url) {
     return url.slice(1)
-
-
 }
 
 const server = http.createServer((req, res) => {
