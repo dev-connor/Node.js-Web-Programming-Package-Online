@@ -1,19 +1,28 @@
 // @ts-check
 
-console.log(process.argv)
-
 const { program } = require('commander')
+const fs = require('fs')
 
 program.version('0.0.1')
 
 program
-  .command('List-bugs')
+  .command('list-bugs')
   .description('List issues with bug label')
-  .action(() => {
+  .action(async () => {
+    console.log('Before readFile...')
+    const result = await fs.promises.readFile('.prettierrc')
+    console.log('readFile result: ', result)
     console.log('List bugs!');
   })
-  
-program.parse()
+
+program
+  .command('check-prs')
+  .description('Check pull request status')
+  .action(async () => {
+    console.log('Check PRs!')
+  })
+
+program.parseAsync()
 
 
 // program
