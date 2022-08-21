@@ -1,3 +1,6 @@
 {
-    "private": true
+    "private": true,
+    "dependencies": {
+        "@connor_/fc21-test-pkg": "^0.1.0"
+    }
 }
