@@ -1,0 +1,6 @@
+{
+    "private": true,
+    "dependencies": {
+        "@connor_/fc21-test-pkg": "file:fc21-test-pkg"
+    }
+}
