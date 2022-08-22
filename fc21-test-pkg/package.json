@@ -1,5 +1,7 @@
 {
 	"name": "@connor_/fc21-test-pkg",
-    "version": "0.1.0",
-    "main": "main.js"
+    "version": "0.1.2",
+    "main": "main.js",
+    "keywords": ["util"],
+    "license": "MIT"
 }
