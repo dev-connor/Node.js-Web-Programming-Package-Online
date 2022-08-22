@@ -1,6 +1,7 @@
 {
     "private": true,
     "dependencies": {
-        "@connor_/fc21-test-pkg": "^0.1.0"
+        "@connor_/fc21-test-pkg": "^0.1.0",
+        "pg": "^8.6.0"
     }
 }
