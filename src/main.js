@@ -30,8 +30,8 @@ program.command('add').action(async () => {
         message: 'Provide a user name to insert.',
     })
 
-    const query = `INSERT INTO users (name) VALUES ('${userName.userName}')`
-    await client.query(query)
+    const query = `INSERT INTO users (name) VALUES ($1::text)`
+    await client.query(query, [userName.userName])
     
     await client.end()
 })
@@ -46,9 +46,9 @@ program
         message: 'Provide a user name to delete.',
     })
 
-    const query = `DELETE FROM users WHERE name = '${userName.userName}'`
-    console.log(query)
-    await client.query(query)
+    await client.query(`DELETE FROM users WHERE name = $1::text`, [
+        userName.userName,
+    ])
     
     await client.end()
 })
