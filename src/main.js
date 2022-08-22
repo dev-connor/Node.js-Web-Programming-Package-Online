@@ -46,7 +46,8 @@ program
         message: 'Provide a user name to delete.',
     })
 
-    const query = `DELETE FROM users WHERE name = ('${userName.userName}')`
+    const query = `DELETE FROM users WHERE name = '${userName.userName}'`
+    console.log(query)
     await client.query(query)
     
     await client.end()
