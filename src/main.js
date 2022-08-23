@@ -1,6 +1,8 @@
 // @ts-check
 
-const { Sequelize } = require('sequelize')
+const { createPrivateKey } = require('crypto')
+const { Sequelize, DataTypes } = require('sequelize')
+const { Z_DEFAULT_STRATEGY } = require('zlib')
 
 async function main() {
     const sequelize = new Sequelize({
@@ -11,6 +13,19 @@ async function main() {
         host: 'localhost',
     })
 
+    const User = sequelize.define('user', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
+        name: {
+            type: DataTypes.STRING,
+            primaryKey: false,
+        },
+    })
+    
+    await sequelize.sync()
+    
     await sequelize.authenticate()
     await sequelize.close()
 
