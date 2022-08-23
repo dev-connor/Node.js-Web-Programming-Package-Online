@@ -17,6 +17,7 @@ async function main() {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
         },
         name: {
             type: DataTypes.STRING,
@@ -37,20 +38,35 @@ async function main() {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
+                autoIncrement: true,
             },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+        }, {
+            timestamps: false,
         }
     )
 
     User.belongsTo(City)
     
     await sequelize.sync({
-        alter: true,
+        force: true,
     })
     
+    const newCity = City.build({
+        name: 'Seoul',
+    }).save()
+
+    console.log(newCity)
+    
+    await User.build({
+        name: 'Coco',
+        age: 24,
+        cityId: (await newCity).getDataValue('id'),
+    }).save()
+        
     await sequelize.authenticate()
     await sequelize.close()
 
