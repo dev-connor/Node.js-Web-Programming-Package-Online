@@ -20,11 +20,17 @@ async function main() {
         },
         name: {
             type: DataTypes.STRING,
-            primaryKey: false,
+            allowNull: false,
         },
-    })
+    },
+    {
+        timestamps: false,
+    }
+    )
     
-    await sequelize.sync()
+    await sequelize.sync({
+        alter: true,
+    })
     
     await sequelize.authenticate()
     await sequelize.close()
