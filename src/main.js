@@ -69,7 +69,6 @@ async function main() {
         
     await sequelize.authenticate()
     await sequelize.close()
-
 }
 
 main()
