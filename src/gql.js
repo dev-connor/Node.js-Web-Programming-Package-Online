@@ -37,7 +37,12 @@ const books = [
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
-      books: () => books,
+      books: () => [
+        {
+            title: 'Test Book',
+            author: 'Test Author',
+        }
+      ],
     },
   }
 
