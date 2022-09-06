@@ -5,7 +5,9 @@
     "private": true,
     "dependencies": {
         "@connor_/fc21-test-pkg": "^0.1.0",
+        "apollo-server": "^2.25.0",
         "commander": "^7.2.0",
+        "graphql": "^15.5.0",
         "pg": "^8.6.0",
         "prompts": "^2.4.1",
         "sequelize": "^6.6.2",
