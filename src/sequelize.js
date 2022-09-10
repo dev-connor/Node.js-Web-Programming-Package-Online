@@ -4,7 +4,6 @@ const { createPrivateKey } = require('crypto')
 const { Sequelize, DataTypes } = require('sequelize')
 const { Z_DEFAULT_STRATEGY } = require('zlib')
 
-async function main() {
     const sequelize = new Sequelize({
         database: 'fc21',
         username: 'myuser',
@@ -50,26 +49,9 @@ async function main() {
     )
 
     User.belongsTo(City)
-    
-    await sequelize.sync({
-        force: true,
-    })
-    
-    const newCity = City.build({
-        name: 'Seoul',
-    }).save()
 
-    console.log(newCity)
-    
-    await User.build({
-        name: 'Coco',
-        age: 24,
-        cityId: (await newCity).getDataValue('id'),
-    }).save()
-        
-    await sequelize.authenticate()
-    await sequelize.close()
+module.exports = {
+    sequelize,
+    User,
+    City,
 }
-
-main()
-
