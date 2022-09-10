@@ -82,6 +82,5 @@ const resolvers = {
     console.log(`🚀  Server ready at ${url}`);
     })
   }
-
   main()
   
