@@ -15,6 +15,7 @@ const typeDefs = gql`
     type City {
         id: Int!
         name: String!
+        users: [User]
     }
 
     type Query {
@@ -40,6 +41,16 @@ const resolvers = {
                 }
             })
         }
+    },
+
+    City: {
+        users: async (city) => {
+            return User.findAll({
+                where: {
+                    cityId: city.id,
+                }
+            })
+        }
     }
   }
   
@@ -57,10 +68,11 @@ const resolvers = {
         name: 'Coco',
         cityId: seoul.getDataValue('id'),
     }).save()
-
+    
     await User.build({
         age: 30,
         name: 'Eoeo',
+        cityId: seoul.getDataValue('id'),
     }).save()
 
     
