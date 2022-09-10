@@ -20,6 +20,10 @@ const typeDefs = gql`
   type Query {
     books(search: String): [Book]
   }
+  type Mutation {
+    addBook(title: String!, author: String!): Book
+    }
+
 `
 
 const books = [
@@ -43,10 +47,23 @@ const books = [
 
   // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
+/**
+ * @type {import('apollo-server').IResolvers}
+ */
 const resolvers = {
     Query: {
       books: (_, {search}) => 
-      books.filter(({title}) => title.includes(search)),
+      search ? books.filter(({title}) => title.includes(search)) : books,
+    },
+    Mutation: {
+        addBook: (_, {title, author}) => {
+            const newBook = {
+                title, 
+                author,
+            }
+            books.push(newBook)
+            return newBook
+        },
     },
   }
   
