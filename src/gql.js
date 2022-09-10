@@ -18,7 +18,7 @@ const typeDefs = gql`
   # clients can execute, along with the return type for each. In this
   # case, the "books" query returns an array of zero or more Books (defined above).
   type Query {
-    books: [Book]
+    books(search: String): [Book]
   }
 `
 
@@ -31,18 +31,22 @@ const books = [
       title: 'City of Glass',
       author: 'Paul Auster',
     },
+    {
+      title: 'Mastering NodeJS',
+      author: 'JH',
+    },
+    {
+      title: 'Mastering JS',
+      author: 'HJ',
+    },
   ]
 
   // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
-      books: () => [
-        {
-            title: 'Test Book',
-            author: 'Test Author',
-        }
-      ],
+      books: (_, {search}) => 
+      books.filter(({title}) => title.includes(search)),
     },
   }
   
@@ -69,7 +73,7 @@ const resolvers = {
     // ],
   })
   
-  
+
   // The `listen` method launches a web server.
   server.listen(5000).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
