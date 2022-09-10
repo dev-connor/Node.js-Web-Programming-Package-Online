@@ -1,6 +1,7 @@
 // @ts-check
 
 const { ApolloServer, gql } = require('apollo-server')
+const { ParameterDescriptionMessage } = require('pg-protocol/dist/messages')
 const {sequelize, User, City} = require('./sequelize')
 
 const typeDefs = gql`
@@ -28,6 +29,18 @@ const resolvers = {
     Query: {
       users: async () => User.findAll()
     },
+
+    User: {
+        city: async (user) => {
+            console.log(user)
+
+            return City.findOne({
+                where: {
+                    id: user.cityId
+                }
+            })
+        }
+    }
   }
   
   
